@@ -2,6 +2,7 @@ import './App.css';
 import React, { useState } from 'react';
 import { Modal, Button } from 'antd';
 import Employeeregistration from './components/Employeeregistration';
+import EmployeeView from './components/EmployeeView';
 function App() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const showModal = () => {
@@ -22,7 +23,9 @@ function App() {
       </Button>
       <Modal title="Basic Modal"  visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
       <Employeeregistration></Employeeregistration>
+      
       </Modal>
+      <EmployeeView/>
       
     </div>
   );
