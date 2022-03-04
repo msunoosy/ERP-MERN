@@ -3,9 +3,7 @@ import axios from "axios"
 import { Form, Input, InputNumber, Button, DatePicker, Select } from 'antd';
 
 function Employeeregistration() {
-    const [form] = Form.useForm();
-
-    
+    // const [form] = Form.useForm();
     const { Option } = Select;
     
 
@@ -16,7 +14,7 @@ function Employeeregistration() {
                     width: 70,
                 }}
             >
-                <Option value="86">+94</Option>
+                <Option value="94">+94</Option>
                 <Option value="87">+87</Option>
             </Select>
         </Form.Item>
@@ -50,16 +48,16 @@ function Employeeregistration() {
     /* eslint-enable no-template-curly-in-string */
 
     const onFinish = (values) => {
-        form.resetFields();
-        // values.phone=values.prefix+values.contactNumber
-        // axios.post('http://localhost:8081/api/employees',values)
-        //   .then(function (response) {
+        
+        values.phone=values.prefix+values.contactNumber
+        axios.post('http://localhost:8081/api/employees',values)
+          .then(function (response) {
             
-        //     console.log(response);
-        //   })
-        //   .catch(function (error) {
-        //     console.log(error);
-        //   });
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
     };
 
 

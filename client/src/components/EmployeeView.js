@@ -1,67 +1,40 @@
 import React from 'react'
-import { Form, Input, InputNumber, Button, DatePicker, Select, Table, Tag, Space } from 'antd';
-function EmployeeView() {
-    const { Column, ColumnGroup } = Table;
-    const data = [
-        {
-          key: '1',
-          firstName: 'John',
-          lastName: 'Brown',
-          age: 32,
-          address: 'New York No. 1 Lake Park',
-          tags: ['nice', 'developer'],
-        },
-        {
-          key: '2',
-          firstName: 'Jim',
-          lastName: 'Green',
-          age: 42,
-          address: 'London No. 1 Lake Park',
-          tags: ['loser'],
-        },
-        {
-          key: '3',
-          firstName: 'Joe',
-          lastName: 'Black',
-          age: 32,
-          address: 'Sidney No. 1 Lake Park',
-          tags: ['cool', 'teacher'],
-        },
-      ];
+import { Table, Space } from 'antd';
+function EmployeeView(props) {
+
+    const { Column} = Table;
+    const empData=props.empData
+
+    const updateClicked=()=>{
+    console.log("update Clicked")
+    }
+
+    const deleteClicked=()=>{
+      console.log("deleteClicked")
+      }
+
   return (
     <div>
-     <Table dataSource={data}>
-    <ColumnGroup title="Name">
-      <Column title="First Name" dataIndex="firstName" key="firstName" />
-      <Column title="Last Name" dataIndex="lastName" key="lastName" />
-    </ColumnGroup>
-    <Column title="Age" dataIndex="age" key="age" />
-    <Column title="Address" dataIndex="address" key="address" />
-    <Column
-      title="Tags"
-      dataIndex="tags"
-      key="tags"
-      render={tags => (
-        <>
-          {tags.map(tag => (
-            <Tag color="blue" key={tag}>
-              {tag}
-            </Tag>
-          ))}
-        </>
-      )}
-    />
+     <Table dataSource={empData}>
+      <Column title="Id" dataIndex="id" key="_id"  />
+      <Column title="First Name" dataIndex="firstname" key="_id" />
+      <Column title="Last Name" dataIndex="lastname" key="_id" />
+      <Column title="Date of Birth"  dataIndex="dob" key="_id" />
+      <Column title="Age" dataIndex="age" key="_id" />
+      <Column title="Email"  dataIndex="email" key="_id"/>
+      <Column title="Phone"  dataIndex="phone" key="_id"/>
     <Column
       title="Action"
       key="action"
       render={(text, record) => (
         <Space size="middle">
-          <a>Invite {record.lastName}</a>
-          <a>Delete</a>
+          <a onClick={updateClicked}>Update </a>
+          <a onClick={deleteClicked}>Delete</a>
         </Space>
       )}
     />
-  </Table>,</div>
+  </Table>
+  </div>
   )
 }
 
