@@ -12,12 +12,19 @@ router.get("/",(req,res)=>{
 
 
 router.post('/',(req,res)=>{
-    console.log(req.body)
     const employee=new Employees(req.body)
     employee.save((err,doc)=>{
         if(err) console.log(err)
         res.json(doc)
     })
+
+router.delete('/:id',(req,res)=>{
+    Employees.findByIdAndDelete(req.params.id,(err,doc)=>{
+        if(err)console.log(err)
+        res.json(doc)
+    })
+})
+
 
 })
 
