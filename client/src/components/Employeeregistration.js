@@ -1,37 +1,13 @@
 import React from 'react'
-import { Form, Input, InputNumber, Button, DatePicker, Select, Table, Tag, Space } from 'antd';
+import axios from "axios"
+import { Form, Input, InputNumber, Button, DatePicker, Select } from 'antd';
 
 function Employeeregistration() {
+    const [form] = Form.useForm();
 
-
-    const { Column, ColumnGroup } = Table;
+    
     const { Option } = Select;
-    const data = [
-        {
-          key: '1',
-          firstName: 'John',
-          lastName: 'Brown',
-          age: 32,
-          address: 'New York No. 1 Lake Park',
-          tags: ['nice', 'developer'],
-        },
-        {
-          key: '2',
-          firstName: 'Jim',
-          lastName: 'Green',
-          age: 42,
-          address: 'London No. 1 Lake Park',
-          tags: ['loser'],
-        },
-        {
-          key: '3',
-          firstName: 'Joe',
-          lastName: 'Black',
-          age: 32,
-          address: 'Sidney No. 1 Lake Park',
-          tags: ['cool', 'teacher'],
-        },
-      ];
+    
 
     const prefixSelector = (
         <Form.Item name="prefix" noStyle>
@@ -74,7 +50,16 @@ function Employeeregistration() {
     /* eslint-enable no-template-curly-in-string */
 
     const onFinish = (values) => {
-        console.log(values);
+        form.resetFields();
+        // values.phone=values.prefix+values.contactNumber
+        // axios.post('http://localhost:8081/api/employees',values)
+        //   .then(function (response) {
+            
+        //     console.log(response);
+        //   })
+        //   .catch(function (error) {
+        //     console.log(error);
+        //   });
     };
 
 
@@ -83,7 +68,7 @@ function Employeeregistration() {
         <div>
             <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
             <Form.Item
-                    name={['user', 'id']}
+                    name={'id'}
                     label="ID"
                     rules={[
                         {
@@ -95,7 +80,7 @@ function Employeeregistration() {
                     <InputNumber />
                 </Form.Item>
                 <Form.Item
-                    name={['user', 'firstname']}
+                    name={'firstname'}
                     label="First Name"
                     rules={[
                         {
@@ -106,7 +91,7 @@ function Employeeregistration() {
                     <Input />
                 </Form.Item>
                 <Form.Item
-                    name={['user', 'lastname']}
+                    name={'lastname'}
                     label="Last Name"
                     rules={[
                         {
@@ -117,12 +102,12 @@ function Employeeregistration() {
                     <Input />
                 </Form.Item>
 
-                <Form.Item name={['user', 'dob']} label="Date of birth">
+                <Form.Item name={'dob'} label="Date of birth">
                     <DatePicker onChange={onChange} />
                 </Form.Item>
 
                 <Form.Item
-                    name={['user', 'age']}
+                    name={'age'}
                     label="Age"
                     rules={[
                         {
@@ -136,7 +121,7 @@ function Employeeregistration() {
                 </Form.Item>
 
                 <Form.Item
-                    name={['user', 'email']}
+                    name={'email'}
                     label="Email"
                     rules={[
                         {
@@ -148,7 +133,7 @@ function Employeeregistration() {
                 </Form.Item>
 
                 <Form.Item
-                    name="phone"
+                    name="contactNumber"
                     label="Phone Number"
                     rules={[
                         {
@@ -172,38 +157,7 @@ function Employeeregistration() {
                     </Button>
                 </Form.Item>
             </Form>
-            <Table dataSource={data}>
-    <ColumnGroup title="Name">
-      <Column title="First Name" dataIndex="firstName" key="firstName" />
-      <Column title="Last Name" dataIndex="lastName" key="lastName" />
-    </ColumnGroup>
-    <Column title="Age" dataIndex="age" key="age" />
-    <Column title="Address" dataIndex="address" key="address" />
-    <Column
-      title="Tags"
-      dataIndex="tags"
-      key="tags"
-      render={tags => (
-        <>
-          {tags.map(tag => (
-            <Tag color="blue" key={tag}>
-              {tag}
-            </Tag>
-          ))}
-        </>
-      )}
-    />
-    <Column
-      title="Action"
-      key="action"
-      render={(text, record) => (
-        <Space size="middle">
-          <a>Invite {record.lastName}</a>
-          <a>Delete</a>
-        </Space>
-      )}
-    />
-  </Table>,
+           
         </div>
     )
 }
