@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from "axios"
-import { Form, Input, InputNumber, Button, DatePicker, Select } from 'antd';
+import { Form, Input, InputNumber, Button, DatePicker, Select,message } from 'antd';
 
 function Employeeregistration(props) {
     const { Option } = Select;
@@ -48,6 +48,7 @@ function Employeeregistration(props) {
             .then(function (response) {
                 console.log('response', response)
                 props.handleCancel()
+                message.success('Employee Details added Sucessfully');
                 form.resetFields();
 
             })
