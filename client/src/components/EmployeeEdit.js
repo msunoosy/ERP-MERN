@@ -58,7 +58,7 @@ function Employeeedit(props) {
     
   return (
     <div> <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
-        {/* <Input value={props?.employeedetail?.firstname}/> */}
+        <Input value={props?.employeedetail?.firstname}/>
     <Form.Item
             name={'id'}
             label="ID"

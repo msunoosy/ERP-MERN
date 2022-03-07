@@ -20,16 +20,7 @@ function Employeeregistration(props) {
         </Form.Item>
     );
 
-    function onDobClicked(values) {
-        console.log(values)
-        const todayDate = new Date();
-        if ((values._d >todayDate)&&(todayDate===todayDate))  {
-            message.error("Invalid date of birth entered")
-            form.resetFields();
-        } else {
-            return
-        }
-    }
+    
 
     const layout = {
         labelCol: {
@@ -116,7 +107,7 @@ function Employeeregistration(props) {
                         required: true,
                     },
                 ]} >
-                    <DatePicker onChange={onDobClicked}  />
+                    <DatePicker   />
                 </Form.Item>
 
                 <Form.Item
