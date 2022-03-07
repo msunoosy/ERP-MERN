@@ -1,8 +1,11 @@
 import React from 'react'
 import axios from "axios"
-import { Form, Input, InputNumber, Button, DatePicker, Select,message } from 'antd';
+import { Form, Input, InputNumber, Button, DatePicker, Select, message } from 'antd';
 
 function Employeeregistration(props) {
+
+    
+    const [form] = Form.useForm();
     const { Option } = Select;
     const prefixSelector = (
         <Form.Item name="prefix" noStyle>
@@ -17,7 +20,16 @@ function Employeeregistration(props) {
         </Form.Item>
     );
 
-
+    function onDobClicked(values) {
+        console.log(values)
+        const todayDate = new Date();
+        if ((values._d >todayDate)&&(todayDate===todayDate))  {
+            message.error("Invalid date of birth entered")
+            form.resetFields();
+        } else {
+            return
+        }
+    }
 
     const layout = {
         labelCol: {
@@ -41,7 +53,8 @@ function Employeeregistration(props) {
         },
     };
     /* eslint-enable no-template-curly-in-string */
-    const [form] = Form.useForm();
+ 
+
     const onFinish = (values) => {
         values.phone = values.prefix + values.contactNumber
         axios.post('http://localhost:8081/api/employees', values)
@@ -103,7 +116,7 @@ function Employeeregistration(props) {
                         required: true,
                     },
                 ]} >
-                    <DatePicker />
+                    <DatePicker onChange={onDobClicked}  />
                 </Form.Item>
 
                 <Form.Item
