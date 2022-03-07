@@ -3,10 +3,9 @@ import axios from "axios"
 import { Form, Input, InputNumber, Button, DatePicker, Select, message } from 'antd';
 
 function Employeeregistration(props) {
-
-    
     const [form] = Form.useForm();
     const { Option } = Select;
+
     const prefixSelector = (
         <Form.Item name="prefix" noStyle>
             <Select
@@ -50,11 +49,9 @@ function Employeeregistration(props) {
         values.phone = values.prefix + values.contactNumber
         axios.post('http://localhost:8081/api/employees', values)
             .then(function (response) {
-                console.log('response', response)
-                props.handleCancel()
                 message.success('Employee Details added Sucessfully');
                 form.resetFields();
-
+                props.handleCancel()     
             })
             .catch(function (error) {
                 console.log(error);

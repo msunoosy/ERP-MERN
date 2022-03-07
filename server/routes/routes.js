@@ -3,8 +3,7 @@ const Employees = require("../models/model")
 const router =express.Router()
 
 
-router.get("/",(req,res)=>{
-    
+router.get("/",(req,res)=>{ 
   Employees.find((err,doc)=>{
       if(err)console.log(err)
       res.json(doc)
