@@ -4,6 +4,7 @@ const router =express.Router()
 
 
 router.get("/",(req,res)=>{
+    
   Employees.find((err,doc)=>{
       if(err)console.log(err)
       res.json(doc)
@@ -17,15 +18,13 @@ router.post('/',(req,res)=>{
         if(err) console.log(err)
         res.json(doc)
     })
+})
 
-router.delete('/:id',(req,res)=>{
+router.delete("/:id",(req,res)=>{
     Employees.findByIdAndDelete(req.params.id,(err,doc)=>{
         if(err)console.log(err)
         res.json(doc)
     })
-})
-
-
 })
 
 module.exports=router

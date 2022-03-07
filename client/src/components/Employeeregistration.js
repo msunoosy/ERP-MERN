@@ -2,11 +2,8 @@ import React from 'react'
 import axios from "axios"
 import { Form, Input, InputNumber, Button, DatePicker, Select } from 'antd';
 
-function Employeeregistration() {
-    // const [form] = Form.useForm();
+function Employeeregistration(props) {
     const { Option } = Select;
-    
-
     const prefixSelector = (
         <Form.Item name="prefix" noStyle>
             <Select
@@ -20,9 +17,7 @@ function Employeeregistration() {
         </Form.Item>
     );
 
-    function onChange(date, dateString) {
-        console.log(date, dateString);
-    }
+
 
     const layout = {
         labelCol: {
@@ -46,32 +41,34 @@ function Employeeregistration() {
         },
     };
     /* eslint-enable no-template-curly-in-string */
-
+    const [form] = Form.useForm();
     const onFinish = (values) => {
-        
-        values.phone=values.prefix+values.contactNumber
-        axios.post('http://localhost:8081/api/employees',values)
-          .then(function (response) {
-            
-            console.log(response);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+        values.phone = values.prefix + values.contactNumber
+        axios.post('http://localhost:8081/api/employees', values)
+            .then(function (response) {
+                console.log('response', response)
+                props.handleCancel()
+                form.resetFields();
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     };
 
 
     return (
 
         <div>
-            <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
-            <Form.Item
+            <Form {...layout} name="nest-messages" form={form} onFinish={onFinish} validateMessages={validateMessages}>
+                <Form.Item
                     name={'id'}
                     label="ID"
                     rules={[
                         {
                             type: 'number',
                             min: 0,
+                            required: true,
                         },
                     ]}
                 >
@@ -100,8 +97,12 @@ function Employeeregistration() {
                     <Input />
                 </Form.Item>
 
-                <Form.Item name={'dob'} label="Date of birth">
-                    <DatePicker onChange={onChange} />
+                <Form.Item name={'dob'} label="Date of birth" rules={[
+                    {
+                        required: true,
+                    },
+                ]} >
+                    <DatePicker />
                 </Form.Item>
 
                 <Form.Item
@@ -112,6 +113,7 @@ function Employeeregistration() {
                             type: 'number',
                             min: 0,
                             max: 99,
+                            required: true,
                         },
                     ]}
                 >
@@ -124,6 +126,7 @@ function Employeeregistration() {
                     rules={[
                         {
                             type: 'email',
+                            required: true,
                         },
                     ]}
                 >
@@ -149,13 +152,13 @@ function Employeeregistration() {
                 </Form.Item>
 
 
-             <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+                <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
                     <Button type="primary" htmlType="submit">
                         Submit
                     </Button>
                 </Form.Item>
             </Form>
-           
+
         </div>
     )
 }

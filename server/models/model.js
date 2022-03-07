@@ -7,8 +7,7 @@ const EmployeesSchema=new mongoose.Schema({
     dob:String,
     age:String,
     email:String,
-    phone:String
-
+    phone:String,
 })
 
 const Employees=mongoose.model('employee',EmployeesSchema)
