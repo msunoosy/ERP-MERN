@@ -5,6 +5,7 @@ import { Form, Input, InputNumber, Button, DatePicker, Select, message } from 'a
 function Employeeregistration(props) {
     const [form] = Form.useForm();
     const { Option } = Select;
+   
 
     const prefixSelector = (
         <Form.Item name="prefix" noStyle>
@@ -47,20 +48,32 @@ function Employeeregistration(props) {
 
     const onFinish = (values) => {
         values.phone = values.prefix + values.contactNumber
-        axios.post('http://localhost:8081/api/employees', values)
-            .then(function (response) {
-                message.success('Employee Details added Sucessfully');
-                form.resetFields();
-                props.handleCancel()     
+        if(values.email){
+            axios.get(`http://localhost:8081/api/employees?email=${values.email}`)
+            .then(function (res) {
+                if(res?.data.length===0){
+                    axios.post('http://localhost:8081/api/employees', values)
+                    .then(function (response) {
+                        message.success('Employee Details added Sucessfully');
+                        form.resetFields();
+                        props.handleCancel()     
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                }else{
+                    message.error('Employee email already exist');  
+                }              
             })
             .catch(function (error) {
                 console.log(error);
             });
+        }
+        
     };
 
 
     return (
-
         <div>
             <Form {...layout} name="nest-messages" form={form} onFinish={onFinish} validateMessages={validateMessages}>
                 <Form.Item

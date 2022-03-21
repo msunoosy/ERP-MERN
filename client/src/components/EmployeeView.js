@@ -114,7 +114,7 @@ function onConfirmClicked(){
 
   return (
     <div>
-      <Table dataSource={props.empData} columns={columns} />
+      <Table dataSource={props.empData} columns={columns}  />
       <Modal title="Edit Employee" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={null} >
         <Employeeedit  empdata={props.empData} employeedetail={employeedetail}></Employeeedit>
       </Modal>

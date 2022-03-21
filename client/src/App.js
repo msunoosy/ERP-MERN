@@ -27,7 +27,7 @@ function App() {
         Employee Registration
       </Button>
       <Modal title="Register Employee" visible={isModalVisible} onCancel={handleCancel} footer={null}>
-        <Employeeregistration editData={editData} handleCancel={handleCancel}></Employeeregistration>
+        <Employeeregistration  handleCancel={handleCancel}></Employeeregistration>
       </Modal>
       <EmployeeView empData={empData}  />
     </div>
