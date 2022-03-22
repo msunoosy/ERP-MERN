@@ -37,7 +37,7 @@ function EmployeeView(props) {
 
     {
       title: 'First Name',
-      dataIndex: 'firstname',
+      dataIndex: 'title',
       key: 'firstname',
     },
     {

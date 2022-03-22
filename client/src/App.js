@@ -5,14 +5,17 @@ import Employeeregistration from './components/Employeeregistration';
 import EmployeeView from './components/EmployeeView';
 import axios from 'axios';
 function App() {
-  
+
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [empData, setEmpData] = useState([])
   useEffect(() => {
-    axios.get("http://localhost:8081/api/employees").then(res => {
+    axios.get("https://jsonplaceholder.typicode.com/todos").then(res => {
       setEmpData(res.data)
     }).catch(err => console.log(err))
   }, [])
+
+  // "http://localhost:8081/api/employees"
+  
 
   const showModal = (data) => {
     setIsModalVisible(true);
