@@ -76,19 +76,7 @@ function Employeeregistration(props) {
     return (
         <div>
             <Form {...layout} name="nest-messages" form={form} onFinish={onFinish} validateMessages={validateMessages}>
-                <Form.Item
-                    name={'id'}
-                    label="ID"
-                    rules={[
-                        {
-                            type: 'number',
-                            min: 0,
-                            required: true,
-                        },
-                    ]}
-                >
-                    <InputNumber />
-                </Form.Item>
+             
                 <Form.Item
                     name={'firstname'}
                     label="First Name"

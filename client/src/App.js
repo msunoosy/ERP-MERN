@@ -5,6 +5,7 @@ import Employeeregistration from './components/Employeeregistration';
 import EmployeeView from './components/EmployeeView';
 import axios from 'axios';
 function App() {
+  
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [empData, setEmpData] = useState([])
   useEffect(() => {
@@ -12,6 +13,7 @@ function App() {
       setEmpData(res.data)
     }).catch(err => console.log(err))
   }, [])
+
   const showModal = (data) => {
     setIsModalVisible(true);
   };

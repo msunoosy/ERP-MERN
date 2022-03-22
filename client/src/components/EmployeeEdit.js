@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
-import axios from "axios"
-import { message, Space } from 'antd';
+import React from 'react'
+
+import {  Space } from 'antd';
 
 function Employeeedit(props) {
 
     return (
         <div>
-            <Space direction="vertical">
             <form>
+            <Space direction="vertical">
             <input type="text" value={props?.employeedetail?.id} />
             <input value={props?.employeedetail?.firstname} />
             <input value={props?.employeedetail?.lastname} />
@@ -16,8 +16,8 @@ function Employeeedit(props) {
             <input value={props?.employeedetail?.email} />
             <input value={props?.employeedetail.phone} />
             <button >Submit</button>
-            </form>
             </Space>
+            </form>
         </div>
     )
 }

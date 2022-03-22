@@ -26,11 +26,6 @@ function EmployeeView(props) {
     }).catch(err => console.log(err))
   }
 
-function onConfirmClicked(){
-  
-
-}
-
 
 
   const columns = [

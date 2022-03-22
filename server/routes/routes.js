@@ -15,16 +15,22 @@ router.get("/", (req, res) => {
             res.json(doc)
         })
     }
-
 })
 
 
 router.post('/', (req, res) => {
-    const employee = new Employees(req.body)
-    employee.save((err, doc) => {
-        if (err) console.log(err)
-        res.json(doc)
+    
+    Employees.find((err, doc) => {
+        if(doc){
+            req.body.id = doc?.length +1;
+            const employee = new Employees(req.body)
+            employee.save((err, doc) => {
+                if (err) console.log(err)
+                res.json(doc)
+            })
+        }
     })
+   
 })
 
 router.delete("/:id", (req, res) => {
@@ -33,7 +39,6 @@ router.delete("/:id", (req, res) => {
         res.json(doc)
     })
 })
-
 
 router.put('/:_id', (req, res) => {
     Employees.findOneAndUpdate({
