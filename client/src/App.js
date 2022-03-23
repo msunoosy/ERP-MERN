@@ -32,7 +32,9 @@ function App() {
     setEmpData(newEmployeeList)
   }
 
-
+const updateemployee=()=>{
+  console.log("update")
+}
 
   return (
     <div >
@@ -42,7 +44,7 @@ function App() {
       <Modal title="Register Employee" visible={isModalVisible} onCancel={handleCancel} footer={null}>
         <Employeeregistration handleCancel={handleCancel} addemployee={addemployee}></Employeeregistration>
       </Modal>
-      <EmployeeView empData={empData} removeemployee={removeemployee} />
+      <EmployeeView empData={empData} removeemployee={removeemployee} updateemployee={updateemployee} />
     </div>
   );
 }

@@ -40,7 +40,7 @@ router.delete("/:id", (req, res) => {
     })
 })
 
-router.put('/:_id', (req, res) => {
+router.put('/:id', (req, res) => {
     Employees.findOneAndUpdate({
         _id: req.params.id
     }, req.body, {
