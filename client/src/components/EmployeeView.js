@@ -37,7 +37,7 @@ function EmployeeView(props) {
 
     {
       title: 'First Name',
-      dataIndex: 'title',
+      dataIndex: 'firstname',
       key: 'firstname',
     },
     {
@@ -109,7 +109,7 @@ function EmployeeView(props) {
 
   return (
     <div>
-      <Table dataSource={props.empData} columns={columns}  />
+      <Table dataSource={props.empData} columns={columns} pagination={{ pageSize:5 }}  />
       <Modal title="Edit Employee" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={null} >
         <Employeeedit  empdata={props.empData} employeedetail={employeedetail}></Employeeedit>
       </Modal>

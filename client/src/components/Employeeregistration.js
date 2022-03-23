@@ -3,6 +3,7 @@ import axios from "axios"
 import { Form, Input, InputNumber, Button, DatePicker, Select, message } from 'antd';
 
 function Employeeregistration(props) {
+    
     const [form] = Form.useForm();
     const { Option } = Select;
    
@@ -54,9 +55,11 @@ function Employeeregistration(props) {
                 if(res?.data.length===0){
                     axios.post('http://localhost:8081/api/employees', values)
                     .then(function (response) {
+                        props.addemployee(response?.data)
                         message.success('Employee Details added Sucessfully');
                         form.resetFields();
-                        props.handleCancel()     
+                        props.handleCancel()
+                        
                     })
                     .catch(function (error) {
                         console.log(error);
@@ -105,7 +108,7 @@ function Employeeregistration(props) {
                         required: true,
                     },
                 ]} >
-                    <DatePicker   />
+                    <DatePicker  format={'DD-MM-YYYY'}  />
                 </Form.Item>
 
                 <Form.Item

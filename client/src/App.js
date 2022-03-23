@@ -9,13 +9,11 @@ function App() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [empData, setEmpData] = useState([])
   useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/todos").then(res => {
+    axios.get("http://localhost:8081/api/employees").then(res => {
       setEmpData(res.data)
     }).catch(err => console.log(err))
   }, [])
 
-  // "http://localhost:8081/api/employees"
-  
 
   const showModal = (data) => {
     setIsModalVisible(true);
@@ -25,6 +23,9 @@ function App() {
     setIsModalVisible(false);
   };
 
+  const addemployee=newemployee=>{
+    setEmpData([...empData,newemployee])
+  }
 
   return (
     <div >
@@ -32,7 +33,7 @@ function App() {
         Employee Registration
       </Button>
       <Modal title="Register Employee" visible={isModalVisible} onCancel={handleCancel} footer={null}>
-        <Employeeregistration  handleCancel={handleCancel}></Employeeregistration>
+        <Employeeregistration  handleCancel={handleCancel} addemployee={addemployee}></Employeeregistration>
       </Modal>
       <EmployeeView empData={empData}  />
     </div>
