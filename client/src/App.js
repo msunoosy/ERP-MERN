@@ -28,7 +28,7 @@ function App() {
   }
 
   const removeemployee = (employee) => {
-    const newEmployeeList = empData.filter(item => !(item._id === employee._id))
+    const newEmployeeList = empData.filter(item =>!(item._id === employee._id))
     setEmpData(newEmployeeList)
   }
 
