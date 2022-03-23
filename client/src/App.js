@@ -23,9 +23,16 @@ function App() {
     setIsModalVisible(false);
   };
 
-  const addemployee=newemployee=>{
-    setEmpData([...empData,newemployee])
+  const addemployee = newemployee => {
+    setEmpData([...empData, newemployee])
   }
+
+  const removeemployee = (employee) => {
+    const newEmployeeList = empData.filter(item => !(item._id === employee._id))
+    setEmpData(newEmployeeList)
+  }
+
+
 
   return (
     <div >
@@ -33,9 +40,9 @@ function App() {
         Employee Registration
       </Button>
       <Modal title="Register Employee" visible={isModalVisible} onCancel={handleCancel} footer={null}>
-        <Employeeregistration  handleCancel={handleCancel} addemployee={addemployee}></Employeeregistration>
+        <Employeeregistration handleCancel={handleCancel} addemployee={addemployee}></Employeeregistration>
       </Modal>
-      <EmployeeView empData={empData}  />
+      <EmployeeView empData={empData} removeemployee={removeemployee} />
     </div>
   );
 }

@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import axios from 'axios';
-import { Table, Space, Popconfirm, message,Modal } from 'antd';
+import { Table, Space, Popconfirm, message, Modal } from 'antd';
 import Employeeedit from './EmployeeEdit';
 function EmployeeView(props) {
 
-  const [employeedetail,setEmployeeDetail]=useState({})
+  const [employeedetail, setEmployeeDetail] = useState({})
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = (data) => {
@@ -19,9 +19,12 @@ function EmployeeView(props) {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-  
+
+
+
   function confirmDelete(_id) {
     axios.delete(`http://localhost:8081/api/employees/${_id}`).then(res => {
+      props.removeemployee(res.data)
       message.success('Employee Deleted Sucessfully');
     }).catch(err => console.log(err))
   }
@@ -98,7 +101,7 @@ function EmployeeView(props) {
             okText="Yes"
             cancelText="No"
           >
-           <a >Update</a>
+            <a >Update</a>
           </Popconfirm>
         </Space>
       ),
@@ -109,9 +112,9 @@ function EmployeeView(props) {
 
   return (
     <div>
-      <Table dataSource={props.empData} columns={columns} pagination={{ pageSize:5 }}  />
+      <Table dataSource={props.empData} columns={columns} pagination={{ pageSize: 5 }} />
       <Modal title="Edit Employee" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={null} >
-        <Employeeedit  empdata={props.empData} employeedetail={employeedetail}></Employeeedit>
+        <Employeeedit empdata={props.empData} employeedetail={employeedetail}></Employeeedit>
       </Modal>
     </div>
   )
