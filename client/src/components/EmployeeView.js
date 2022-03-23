@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios';
-import { Table, Space, Popconfirm, message, Modal, Form, Input,Button } from 'antd';
+import { Table, Space, Popconfirm, message, Modal, Input, Button } from 'antd';
 
 function EmployeeView(props) {
 
@@ -27,20 +27,20 @@ function EmployeeView(props) {
     }).catch(err => console.log(err))
   }
 
-  const updateemployee=(employeedetail)=>{
-    axios.put(`http://localhost:8081/api/employees/${employeedetail._id}`,{
-      _id:employeedetail._id,
-      id:employeedetail.id,
-      firstname:employeedetail.firstname,
-      lastname:employeedetail.lastname,
-      dob:employeedetail.dob,
-      age:employeedetail.age,
-      email:employeedetail.email,
-      phone:employeedetail.phone
-    }).then(res=>{
-      message.success("Employee detais updated")
+  const updateemployee = (employeedetail) => {
+    axios.put(`http://localhost:8081/api/employees/${employeedetail._id}`, {
+      _id: employeedetail._id,
+      id: employeedetail.id,
+      firstname: employeedetail.firstname,
+      lastname: employeedetail.lastname,
+      dob: employeedetail.dob,
+      age: employeedetail.age,
+      email: employeedetail.email,
+      phone: employeedetail.phone
+    }).then(res => {
+      message.success("Employee details updated successfully")
       setIsModalVisible(false)
-    }).catch(err=>console.log(err))
+    }).catch(err => console.log(err))
   }
 
 
@@ -122,49 +122,44 @@ function EmployeeView(props) {
 
   ];
 
-
- 
- 
-
-
   return (
     <div>
       <Table dataSource={props.empData} columns={columns} pagination={{ pageSize: 5 }} />
       <Modal title="Edit Employee" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={null} >
-          <Space direction="vertical">
-            <Input value={employeedetail?.id} />
-            <Input value={employeedetail.firstname} onChange={e => {
-              setEmployeeDetail(pre => {
-                return { ...pre, firstname: e.target.value }
-              })
-            }} />
-            <Input value={employeedetail?.lastname} onChange={e => {
-              setEmployeeDetail(pre => {
-                return { ...pre, lastname: e.target.value }
-              })
-            }} />
-            <Input value={employeedetail?.dob} onChange={e => {
-              setEmployeeDetail(pre => {
-                return { ...pre, dob: e.target.value }
-              })
-            }} />
-            <Input value={employeedetail?.age} onChange={e => {
-              setEmployeeDetail(pre => {
-                return { ...pre, age: e.target.value }
-              })
-            }} />
-            <Input value={employeedetail?.email} onChange={e => {
-              setEmployeeDetail(pre => {
-                return { ...pre, email: e.target.value }
-              })
-            }} />
-            <Input value={employeedetail?.phone} onChange={e => {
-              setEmployeeDetail(pre => {
-                return { ...pre, phone: e.target.value }
-              })
-            }} />
-            <Button onClick={()=>updateemployee(employeedetail)} >Submit</Button>
-          </Space>
+        <Space direction="vertical">
+          <Input value={employeedetail?.id} />
+          <Input value={employeedetail.firstname} onChange={e => {
+            setEmployeeDetail(pre => {
+              return { ...pre, firstname: e.target.value }
+            })
+          }} />
+          <Input value={employeedetail?.lastname} onChange={e => {
+            setEmployeeDetail(pre => {
+              return { ...pre, lastname: e.target.value }
+            })
+          }} />
+          <Input value={employeedetail?.dob} onChange={e => {
+            setEmployeeDetail(pre => {
+              return { ...pre, dob: e.target.value }
+            })
+          }} />
+          <Input value={employeedetail?.age} onChange={e => {
+            setEmployeeDetail(pre => {
+              return { ...pre, age: e.target.value }
+            })
+          }} />
+          <Input value={employeedetail?.email} onChange={e => {
+            setEmployeeDetail(pre => {
+              return { ...pre, email: e.target.value }
+            })
+          }} />
+          <Input value={employeedetail?.phone} onChange={e => {
+            setEmployeeDetail(pre => {
+              return { ...pre, phone: e.target.value }
+            })
+          }} />
+          <Button onClick={() => updateemployee(employeedetail)} >Submit</Button>
+        </Space>
       </Modal>
     </div>
   )
