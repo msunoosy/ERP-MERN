@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-import { Table, Space, Popconfirm, message, Modal, Input, Button } from 'antd';
+import { Table, Space, Popconfirm, message, Modal, Input, Button, Form } from 'antd';
 
 function EmployeeView(props) {
 
@@ -27,7 +27,7 @@ function EmployeeView(props) {
     }).catch(err => console.log(err))
   }
 
-  const updateemployee = (employeedetail) => {
+  const updateemployee = () => {
     axios.put(`http://localhost:8081/api/employees/${employeedetail._id}`, {
       _id: employeedetail._id,
       id: employeedetail.id,
@@ -43,7 +43,28 @@ function EmployeeView(props) {
     }).catch(err => console.log(err))
   }
 
+  const validateMessages = {
+    required: '${label} is required!',
+    types: {
+      email: '${label} is not a valid email!',
+      number: '${label} is not a valid number!',
+    },
+    number: {
+      range: '${label} must be between ${min} and ${max}',
+    },
+  };
+  /* eslint-enable no-template-curly-in-string */
+  const layout = {
+    labelCol: {
+      span: 8,
+    },
+    wrapperCol: {
+      span: 8,
+    },
+  };
 
+  const [form] = Form.useForm();
+  
   const columns = [
     {
       title: 'ID',
@@ -122,44 +143,155 @@ function EmployeeView(props) {
 
   ];
 
+    form.setFieldsValue({
+      _id:employeedetail._id,
+      id:employeedetail.id,
+      firstname: employeedetail.firstname,
+      lastname: employeedetail.lastname,
+      dob: employeedetail.dob,
+      age: employeedetail.age,
+      email: employeedetail.email,
+      phone: employeedetail.phone
+    });
+
   return (
     <div>
       <Table dataSource={props.empData} columns={columns} pagination={{ pageSize: 5 }} />
       <Modal title="Edit Employee" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={null} >
-        <Space direction="vertical">
-          <Input value={employeedetail?.id} />
-          <Input value={employeedetail.firstname} onChange={e => {
+        <Form {...layout} name="nest-messages" form={form} validateMessages={validateMessages} onFinish={updateemployee}>
+        <Form.Item
+            name={'_id'}
+            label="_id"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input  disabled onChange={e => {
+            setEmployeeDetail(pre => {
+              return { ...pre, _id: e.target.value }
+            })
+          }}/>
+          </Form.Item>
+          <Form.Item
+            name={'id'}
+            label="Employee id"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input   onChange={e => {
+            setEmployeeDetail(pre => {
+              return { ...pre, id: e.target.value }
+            })
+          }}/>
+          </Form.Item>
+
+          <Form.Item
+            name={'firstname'}
+            label="First Name"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input   onChange={e => {
             setEmployeeDetail(pre => {
               return { ...pre, firstname: e.target.value }
             })
-          }} />
-          <Input value={employeedetail?.lastname} onChange={e => {
+          }}/>
+          </Form.Item>
+          <Form.Item
+            name={'lastname'}
+            label="Last Name"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input onChange={e => {
             setEmployeeDetail(pre => {
               return { ...pre, lastname: e.target.value }
             })
           }} />
-          <Input value={employeedetail?.dob} onChange={e => {
+          </Form.Item>
+          <Form.Item
+            name={'dob'}
+            label="Date of birth"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input onChange={e => {
             setEmployeeDetail(pre => {
               return { ...pre, dob: e.target.value }
             })
           }} />
-          <Input value={employeedetail?.age} onChange={e => {
+          </Form.Item>
+
+          <Form.Item
+            name={'age'}
+            label="Age"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input onChange={e => {
             setEmployeeDetail(pre => {
               return { ...pre, age: e.target.value }
             })
-          }} />
-          <Input value={employeedetail?.email} onChange={e => {
+          }}/>
+          </Form.Item>
+
+          <Form.Item
+            name={'email'}
+            label="Email"
+            rules={[
+              {
+                type: 'email',
+                required: true,
+              },
+            ]}
+          >
+            <Input onChange={e => {
             setEmployeeDetail(pre => {
               return { ...pre, email: e.target.value }
             })
-          }} />
-          <Input value={employeedetail?.phone} onChange={e => {
+          }}/>
+          </Form.Item>
+          <Form.Item
+            name={'phone'}
+            label="Phone"
+            rules={[
+              {
+                
+                required: true,
+              },
+            ]}
+          >
+            <Input onChange={e => {
             setEmployeeDetail(pre => {
               return { ...pre, phone: e.target.value }
             })
           }} />
-          <Button onClick={() => updateemployee(employeedetail)} >Submit</Button>
-        </Space>
+          </Form.Item>
+
+          <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+            <Button type="primary"  htmlType="submit">
+              Submit
+            </Button>
+          </Form.Item>
+        </Form>
+
       </Modal>
     </div>
   )

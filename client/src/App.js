@@ -8,6 +8,7 @@ function App() {
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [empData, setEmpData] = useState([])
+
   useEffect(() => {
     axios.get("http://localhost:8081/api/employees").then(res => {
       setEmpData(res.data)
@@ -32,9 +33,8 @@ function App() {
     setEmpData(newEmployeeList)
   }
 
-const updateemployee=()=>{
-  console.log("update")
-}
+
+
 
   return (
     <div >
@@ -44,7 +44,7 @@ const updateemployee=()=>{
       <Modal title="Register Employee" visible={isModalVisible} onCancel={handleCancel} footer={null}>
         <Employeeregistration handleCancel={handleCancel} addemployee={addemployee}></Employeeregistration>
       </Modal>
-      <EmployeeView empData={empData} removeemployee={removeemployee} updateemployee={updateemployee} />
+      <EmployeeView empData={empData} removeemployee={removeemployee}   />
     </div>
   );
 }
