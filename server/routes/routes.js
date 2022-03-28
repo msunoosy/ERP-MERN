@@ -21,7 +21,7 @@ router.get("/", (req, res) => {
 router.post('/', (req, res) => {
     Employees.find((err, doc) => {
         if(doc){
-            req.body.id = doc?.length +1;
+            req.body.id = doc[doc?.length-1]?.id+1;
             req.body.dob = req?.body?.dob.split('T')[0]
             const employee = new Employees(req.body)
             employee.save((err, doc) => {

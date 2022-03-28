@@ -3,7 +3,8 @@ import axios from 'axios';
 import { Table, Space, Popconfirm, message, Modal, Input, Button, Form } from 'antd';
 
 function EmployeeView(props) {
-
+  const [form] = Form.useForm();
+  let emloyeeList=props.empData
   const [employeedetail, setEmployeeDetail] = useState({})
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -38,6 +39,7 @@ function EmployeeView(props) {
       email: employeedetail.email,
       phone: employeedetail.phone
     }).then(res => {
+      props.updateemployee(res.data)
       message.success("Employee details updated successfully")
       setIsModalVisible(false)
     }).catch(err => console.log(err))
@@ -63,7 +65,7 @@ function EmployeeView(props) {
     },
   };
 
-  const [form] = Form.useForm();
+  
   
   const columns = [
     {
@@ -156,7 +158,7 @@ function EmployeeView(props) {
 
   return (
     <div>
-      <Table dataSource={props.empData} columns={columns} pagination={{ pageSize: 5 }} />
+      <Table dataSource={emloyeeList} columns={columns} pagination={{ pageSize: 10 }} />
       <Modal title="Edit Employee" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={null} >
         <Form {...layout} name="nest-messages" form={form} validateMessages={validateMessages} onFinish={updateemployee}>
         <Form.Item

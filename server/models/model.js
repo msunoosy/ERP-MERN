@@ -1,7 +1,10 @@
 
 const mongoose=require("mongoose")
 const EmployeesSchema=new mongoose.Schema({
-    id:String,
+    id:{
+        type:Number,
+        unique: true
+    },
     firstname:String,
     lastname:String,
     dob:String,

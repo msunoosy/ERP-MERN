@@ -59,7 +59,6 @@ function Employeeregistration(props) {
                         message.success('Employee Details added Sucessfully');
                         form.resetFields();
                         props.handleCancel()
-                        
                     })
                     .catch(function (error) {
                         console.log(error);
@@ -79,7 +78,6 @@ function Employeeregistration(props) {
     return (
         <div>
             <Form {...layout} name="nest-messages" form={form} onFinish={onFinish} validateMessages={validateMessages}>
-             
                 <Form.Item
                     name={'firstname'}
                     label="First Name"
