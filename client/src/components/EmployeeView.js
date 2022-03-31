@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState} from 'react'
 import axios from 'axios';
 import { Table, Space, Popconfirm, message, Modal, Input, Button, Form } from 'antd';
 
 function EmployeeView(props) {
   const [form] = Form.useForm();
-  let emloyeeList=props.empData
   const [employeedetail, setEmployeeDetail] = useState({})
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -29,20 +28,31 @@ function EmployeeView(props) {
   }
 
   const updateemployee = () => {
-    axios.put(`http://localhost:8081/api/employees/${employeedetail._id}`, {
-      _id: employeedetail._id,
-      id: employeedetail.id,
-      firstname: employeedetail.firstname,
-      lastname: employeedetail.lastname,
-      dob: employeedetail.dob,
-      age: employeedetail.age,
-      email: employeedetail.email,
-      phone: employeedetail.phone
-    }).then(res => {
-      props.updateemployee(res.data)
-      message.success("Employee details updated successfully")
-      setIsModalVisible(false)
-    }).catch(err => console.log(err))
+    if(employeedetail.email){
+      axios.get(`http://localhost:8081/api/employees?email=${employeedetail.email}`).then(function(res){
+        if(res.data.length===0){
+          axios.put(`http://localhost:8081/api/employees/${employeedetail._id}`, {
+            _id: employeedetail._id,
+            id: employeedetail.id,
+            firstname: employeedetail.firstname,
+            lastname: employeedetail.lastname,
+            dob: employeedetail.dob,
+            age: employeedetail.age,
+            email: employeedetail.email,
+            phone: employeedetail.phone
+          }).then(res => {
+            props.updateemployee(res.data)
+            message.success("Employee details updated successfully")
+            setIsModalVisible(false)
+          }).catch(err => console.log(err))
+
+        }else{
+          message.error("email already in use")
+        }
+      }).catch((err)=>{
+        console.log(err)
+      })
+  }
   }
 
   const validateMessages = {
@@ -158,7 +168,7 @@ function EmployeeView(props) {
 
   return (
     <div>
-      <Table dataSource={emloyeeList} columns={columns} pagination={{ pageSize: 10 }} />
+      <Table dataSource={props.empData} columns={columns} pagination={{ pageSize: 10 }} />
       <Modal title="Edit Employee" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={null} >
         <Form {...layout} name="nest-messages" form={form} validateMessages={validateMessages} onFinish={updateemployee}>
         <Form.Item
