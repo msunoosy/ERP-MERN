@@ -29,8 +29,8 @@ function EmployeeView(props) {
 
   const updateemployee = () => {
     if(employeedetail.email){
-      axios.get(`http://localhost:8081/api/employees?email=${employeedetail.email}`).then(function(res){
-        if(res.data.length===0){
+      // axios.get(`http://localhost:8081/api/employees?email=${employeedetail.email}`).then(function(res){
+        // if(res.data.length===0){
           axios.put(`http://localhost:8081/api/employees/${employeedetail._id}`, {
             _id: employeedetail._id,
             id: employeedetail.id,
@@ -46,12 +46,12 @@ function EmployeeView(props) {
             setIsModalVisible(false)
           }).catch(err => console.log(err))
 
-        }else{
-          message.error("email already in use")
-        }
-      }).catch((err)=>{
-        console.log(err)
-      })
+        // }else{
+        //   message.error("email already in use")
+        // }
+      // }).catch((err)=>{
+      //   console.log(err)
+      // })
   }
   }
 

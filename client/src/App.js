@@ -25,7 +25,7 @@ function App() {
     axios.get("http://localhost:8081/api/employees").then(res => {
       setEmpData(res.data)
     }).catch(err => console.log(err))
-  })
+  },[empData])
 
 
   const showModal = (data) => {
@@ -80,7 +80,7 @@ function App() {
             <div className="logo" />
             <Menu theme="dark" mode="inline" >
               {Sidebardata.map((val, key) => {
-                console.log('val..>', val)
+                
                 return (
                   <Menu.Item key={key} icon={val.icon} path={val.link} >
                     <Link to={val.link}>{val.title}</Link>
@@ -105,7 +105,7 @@ function App() {
               <div className="site-layout-background" style={{ padding: 24, textAlign: 'center' }}>
                 <Routes>
                   <Route path='/' element={< EmployeeView empData={empData} removeemployee={removeemployee} updateemployee={updateemployee} />}></Route>
-                  <Route path='/Search' element={<Search />}></Route>
+                  <Route path='/Search' element={<Search empData={empData} />}></Route>
                 </Routes>
               </div>
             </Content>
