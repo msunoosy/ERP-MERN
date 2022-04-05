@@ -6,6 +6,11 @@ function EmployeeView(props) {
   const [form] = Form.useForm();
   const [employeedetail, setEmployeeDetail] = useState({})
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const[searched,setSearched]=useState("")
+  let emp=props.empData
+  const[search,setSearch]=useState("")
+ 
+  
 
   const showModal = (record) => {
     setEmployeeDetail(record)
@@ -166,8 +171,38 @@ function EmployeeView(props) {
       phone: employeedetail.phone
     });
 
+    
+
+const searchOnclick=(e)=>{
+  if(search===""){
+ message.error("Cannot be empty")
+  }
+  else{
+    setSearched(emp)
+    const newEmployeeList =emp.filter(employee=>employee.email===search)
+  if(newEmployeeList.length===0){
+      message.error('No records available')
+    }else{
+      
+      props.search(newEmployeeList)
+      setSearch("")
+    }
+  }
+
+}
+
+const onClearButton =()=>{
+ props.clear(searched)
+}
+
+
   return (
     <div>
+       <Input placeholder='Enter Email' style={{width:"150px" }} value={search} onChange={e=>{
+          setSearch(e.target.value)
+        }}></Input>
+        <Button onClick={searchOnclick}>Search</Button>
+        <Button onClick={onClearButton} >Clear</Button>
       <Table dataSource={props.empData} columns={columns} pagination={{ pageSize: 10 }} />
       <Modal title="Edit Employee" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={null} >
         <Form {...layout} name="nest-messages" form={form} validateMessages={validateMessages} onFinish={updateemployee}>

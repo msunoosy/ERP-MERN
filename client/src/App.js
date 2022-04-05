@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import { Layout, Menu, Modal, Button } from 'antd';
+import { Layout, Menu, Modal, Button, message } from 'antd';
 import Employeeregistration from './components/Employeeregistration';
 import EmployeeView from './components/EmployeeView';
 import axios from 'axios';
@@ -18,14 +18,16 @@ function App() {
 
   const { Header, Content, Footer, Sider } = Layout;
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [empData, setEmpData] = useState([])
-
+  let [empData, setEmpData] = useState([])
+  const [isSearch, setIsSearch] = useState(false)
 
   useEffect(() => {
-    axios.get("http://localhost:8081/api/employees").then(res => {
+    if(!isSearch){
+      axios.get("http://localhost:8081/api/employees").then(res => {
       setEmpData(res.data)
-    }).catch(err => console.log(err))
-  },[empData])
+      }).catch(err => console.log(err))
+    }
+  },[])
 
 
   const showModal = (data) => {
@@ -38,6 +40,11 @@ function App() {
 
   const addemployee = newemployee => {
     setEmpData([...empData, newemployee])
+  }
+
+  const search = newEmployeeList => {
+    setEmpData(newEmployeeList)
+    setIsSearch(true)
   }
 
   const removeemployee = (employee) => {
@@ -59,8 +66,15 @@ function App() {
         emp.phone = employee.phone
       }
     })
+    
     setEmpData(employeedetails)
+    console.log("upd>>> ",employeedetails)
   }
+ 
+  const clear=(searched)=>{
+    setEmpData(searched)
+  }
+
 
 
   return (
@@ -104,7 +118,7 @@ function App() {
             <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
               <div className="site-layout-background" style={{ padding: 24, textAlign: 'center' }}>
                 <Routes>
-                  <Route path='/' element={< EmployeeView empData={empData} removeemployee={removeemployee} updateemployee={updateemployee} />}></Route>
+                  <Route path='/' element={< EmployeeView  search={search} empData={empData} removeemployee={removeemployee} updateemployee={updateemployee} clear={clear}/>}></Route>
                   <Route path='/Search' element={<Search empData={empData} />}></Route>
                 </Routes>
               </div>

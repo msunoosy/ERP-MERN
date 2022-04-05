@@ -23,7 +23,7 @@ const searchOnclick=()=>{
         }}></Input>
         <Button onClick={searchOnclick}>Search</Button>
       </Space>
-   <EmployeeView/> 
+  
     </div>
   )
 }
