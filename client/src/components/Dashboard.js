@@ -117,7 +117,7 @@ function Dashboard() {
             <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
               <div className="site-layout-background" style={{ padding: 24, textAlign: 'center' }}>
                 <Routes>
-                  <Route path='/' element={< EmployeeView search={search} empData={empData} removeemployee={removeemployee} updateemployee={updateemployee} clear={clear} />}></Route>
+                  <Route path='/Dashboard' element={< EmployeeView search={search} empData={empData} removeemployee={removeemployee} updateemployee={updateemployee} clear={clear} />}></Route>
                   <Route path='/Search' element={<Search empData={empData} />}></Route>
                 </Routes>
               </div>

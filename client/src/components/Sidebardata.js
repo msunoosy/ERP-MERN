@@ -8,7 +8,7 @@ export const Sidebardata = [
     {
         title: "Employeeregistration",
         icon: <UserOutlined />,
-        link: "/"
+        link: "/Dashboard"
     },
     {
         title: "Search",
