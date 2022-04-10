@@ -7,9 +7,8 @@ function EmployeeView(props) {
   const [employeedetail, setEmployeeDetail] = useState({})
   const [isModalVisible, setIsModalVisible] = useState(false);
   const[searched,setSearched]=useState("")
-  let emp=props.empData
   const[search,setSearch]=useState("")
- 
+  let emp=props.empData
   
 
   const showModal = (record) => {
@@ -176,7 +175,6 @@ const searchOnclick=(e)=>{
   if(newEmployeeList.length===0){
       message.error('No records available')
     }else{
-      
       props.search(newEmployeeList)
       setSearch("")
     }
@@ -186,6 +184,7 @@ const searchOnclick=(e)=>{
 
 const onClearButton =()=>{
  props.clear(searched)
+ setSearch("")
 }
 
 
