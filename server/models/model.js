@@ -10,6 +10,7 @@ const EmployeesSchema=new mongoose.Schema({
     dob:String,
     age:String,
     email:String,
+    password:String,
     phone:String,
 })
 
