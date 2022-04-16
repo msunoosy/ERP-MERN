@@ -41,6 +41,7 @@ function EmployeeView(props) {
             dob: employeedetail.dob,
             age: employeedetail.age,
             email: employeedetail.email,
+            password:employeedetail.password,
             phone: employeedetail.phone
           }).then(res => {
             props.updateemployee(res.data)
@@ -111,6 +112,12 @@ function EmployeeView(props) {
     },
 
     {
+      title: 'Password',
+      dataIndex: 'password',
+      key: 'password',
+    },
+
+    {
       title: 'Phone Number',
       dataIndex: 'phone',
       key: 'phone',
@@ -160,6 +167,7 @@ function EmployeeView(props) {
       dob: employeedetail.dob,
       age: employeedetail.age,
       email: employeedetail.email,
+      password:employeedetail.password,
       phone: employeedetail.phone
     });
 
@@ -183,8 +191,14 @@ const searchOnclick=(e)=>{
 }
 
 const onClearButton =()=>{
+ if(search===""){
+  setSearched(emp)
+   message.error("No data available")
+ }else
+ {
  props.clear(searched)
  setSearch("")
+}
 }
 
 
@@ -259,6 +273,7 @@ const onClearButton =()=>{
             })
           }} />
           </Form.Item>
+
           <Form.Item
             name={'dob'}
             label="Date of birth"
@@ -307,6 +322,27 @@ const onClearButton =()=>{
             })
           }}/>
           </Form.Item>
+
+          <Form.Item
+            name={'password'}
+            label="Password"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input onChange={e => {
+            setEmployeeDetail(pre => {
+              return { ...pre, password: e.target.value }
+            })
+          }} />
+          </Form.Item>
+         
+         
+
+
+
           <Form.Item
             name={'phone'}
             label="Phone"

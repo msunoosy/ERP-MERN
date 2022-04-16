@@ -138,6 +138,18 @@ function Employeeregistration(props) {
                 </Form.Item>
 
                 <Form.Item
+                    name={'password'}
+                    label="Password"
+                    rules={[
+                        {
+                            required: true,
+                        },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+
+                <Form.Item
                     name="contactNumber"
                     label="Phone Number"
                     rules={[
