@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { Layout, Menu, Modal, Button, message } from 'antd';
 import Employeeregistration from "./Employeeregistration"
 import EmployeeView from './EmployeeView';
-// import Login from './components/Login';
 import axios from 'axios';
 import { Sidebardata } from './Sidebardata';
 import {
@@ -129,9 +128,6 @@ function Dashboard() {
       </div>
     </Router>
     </div>
-
-
-
     </div>
   )
 }
