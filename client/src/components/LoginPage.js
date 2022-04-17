@@ -5,7 +5,7 @@ import "./login.css"
 
 
 
-function LoginPage(props) {
+function Loginpage(props) {
   const [loginData, setLoginData] = useState([]);
   const [form] = Form.useForm();
   const onFinish = (values) => {
@@ -111,4 +111,4 @@ function LoginPage(props) {
     </div>
   )
 }
-export default LoginPage;
+export default Loginpage
