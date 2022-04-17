@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import "./Search.css"
-import EmployeeView from './EmployeeView';
-import { Table, Space, Popconfirm, message, Modal, Input, Button, Form } from 'antd';
+import { Space, Input, Button } from 'antd';
 
 
 function Search(props) {
