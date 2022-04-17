@@ -26,7 +26,6 @@ function LoginPage(props) {
           form.resetFields();
           message.error("Invalid Username or Password")
         }
-      
       }))
       }
     }).catch(err => console.log(err))
