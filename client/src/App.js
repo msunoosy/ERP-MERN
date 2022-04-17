@@ -1,7 +1,12 @@
 import React, {useState} from 'react'
 import Dashboard from './components/Dashboard';
 import LoginPage from './components/LoginPage';
-
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+} from "react-router-dom";
 
 function App() {
 
@@ -9,14 +14,15 @@ function App() {
 
   const onLogin = (val) =>{
     setLoginLog(val)
-    console.log('cccc',val)
+    
   }
 
   return (
+    
     <div>
-      
       {loginLog===0?<LoginPage onLogin={onLogin}/>:<Dashboard></Dashboard>}
     </div>
+    
   );
 }
 
