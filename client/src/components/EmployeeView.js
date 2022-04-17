@@ -204,11 +204,13 @@ const onClearButton =()=>{
 
   return (
     <div>
+      <div style={{marginBottom:"20px"}}>
        <Input placeholder='Enter Email' style={{width:"150px" }} value={search} onChange={e=>{
           setSearch(e.target.value)
         }}></Input>
         <Button onClick={searchOnclick}>Search</Button>
         <Button onClick={onClearButton} >Clear</Button>
+        </div>
       <Table dataSource={props.empData} columns={columns} pagination={{ pageSize: 10 }} />
       <Modal title="Edit Employee" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={null} >
         <Form {...layout} name="nest-messages" form={form} validateMessages={validateMessages} onFinish={updateemployee}>
