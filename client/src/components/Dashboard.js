@@ -30,7 +30,7 @@ function Dashboard() {
   
   
     const showModal = (data) => {
-      setIsModalVisible(true);
+      setIsModalVisible(true); 
     };
   
     const handleCancel = () => {
@@ -74,9 +74,6 @@ function Dashboard() {
     }
   
   return (
-    <div>
-   <div>
-    <Router>
       <div  >
         <Layout hasSider>
           <Sider
@@ -90,12 +87,12 @@ function Dashboard() {
             }}
           >
             <div className="logo" />
-            <Menu theme="dark" mode="inline" >
+            <Menu theme="dark" defaultSelectedKeys={['0']}   mode="inline" >
               {Sidebardata.map((val, key) => {
 
                 return (
                   <Menu.Item key={key} icon={val.icon} path={val.link} >
-                    <Link to={val.link}>{val.title}</Link>
+                    <Link to={val.path}>{val.title}</Link>
                   </Menu.Item>
                 )
               })}
@@ -124,11 +121,7 @@ function Dashboard() {
             <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
           </Layout>
         </Layout>
-
       </div>
-    </Router>
-    </div>
-    </div>
   )
 }
 
