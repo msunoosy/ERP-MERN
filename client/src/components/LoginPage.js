@@ -15,7 +15,8 @@ function LoginPage(props) {
         console.log("No response ",res.data)
         message.error("Invalid Username or Password")
         form.resetFields();
-      }else{
+      }
+      else{
       loginData.map((val => {
         if (values.email === val.email && values.password === val.password) {
           props.onLogin(1)
@@ -27,7 +28,7 @@ function LoginPage(props) {
           message.error("Invalid Username or Password")
         }
       }))
-      }
+    }
     }).catch(err => console.log(err))
   }
   const onFinishFailed = (errorInfo) => {
@@ -110,4 +111,4 @@ function LoginPage(props) {
     </div>
   )
 }
-export default LoginPage
+export default LoginPage;
