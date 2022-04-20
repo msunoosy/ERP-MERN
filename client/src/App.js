@@ -1,14 +1,9 @@
 import React, {useState} from 'react'
 import Dashboard from './components/Dashboard';
-import LoginPage from './components/LoginPage';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link,
-} from "react-router-dom";
+import Loginpage from './components/Loginpage';
 
 function App() {
+ 
 
   const [loginLog, setLoginLog] = useState(0);
 
@@ -18,11 +13,13 @@ function App() {
   }
 
   return (
-    
+   
     <div>
-      {loginLog===0?<LoginPage onLogin={onLogin}/>:<Dashboard></Dashboard>}
+      {loginLog===0?<Loginpage onLogin={onLogin}/>:<Dashboard></Dashboard> }
     </div>
-    
+   
+
+   
   );
 }
 

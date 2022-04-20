@@ -6,7 +6,6 @@ import EmployeeView from './EmployeeView';
 import axios from 'axios';
 import { Sidebardata } from './Sidebardata';
 import {
-  BrowserRouter as Router,
   Routes,
   Route,
   Link,
